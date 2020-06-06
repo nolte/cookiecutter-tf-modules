@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  vscode:
+    build: .
+    volumes:
+      - ../:/workspace:cached
+      - ~/.ssh:/home/vscode/.ssh:ro
+      - ~/.ssh:/root/.ssh:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      ## reuse volumes for extensions
+      - cookiecutter-tf-module-vol:/home/vscode/.vscode-server/extensions
+      # And/or for VS Code Insiders
+      - cookiecutter-tf-module-vol-insiders:/home/vscode/.vscode-server-insiders/extensions
+    environment:
+      - TZ=Europe/Berlin # $(cat /etc/timezone)
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    entrypoint: zsh -c "while sleep 1000; do :; done"
+    network_mode: "host"
+
+volumes:
+  cookiecutter-tf-module-vol:
+  cookiecutter-tf-module-vol-insiders:
