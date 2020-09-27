@@ -1,0 +1,11 @@
+include:
+  - project: 'nolte-collection-v2/templating/gitlab-templates/gitlab-cicd-lib'
+    ref: 'feature/combine-pipelines'
+    file: 'ci-templates/tf-basement.yml'
+  - project: 'nolte-collection-v2/templating/gitlab-templates/gitlab-cicd-lib'
+    ref: 'feature/combine-pipelines'
+    file: 'ci-templates/gl-releasing.yml'
+
+stages:
+  - validate
+  - release

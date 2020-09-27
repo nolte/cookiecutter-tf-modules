@@ -1,28 +1,18 @@
 
-{%- if cookiecutter.k8s_create_namespace == "y" %}
-resource "kubernetes_namespace" "release" {
-  depends_on = [var.depends_list]
-  metadata {
-    name = var.release_namespace
+locals {
+  EXTRA_VALUES = {
   }
 }
-{% else %}
-data "kubernetes_namespace" "release" {
-  metadata {
-    name = var.release_namespace
-  }
-}
-{%- endif -%}
+
 
 resource "helm_release" "release" {
-  {% if cookiecutter.k8s_create_namespace != "y" %}depends_on = [var.depends_list]{% endif %}
   name       = "{{ cookiecutter.helm_release_name }}"
   repository = "{{ cookiecutter.helm_chart_repository }}"
   chart      = "{{ cookiecutter.helm_chart }}"
-  namespace  = {% if cookiecutter.k8s_create_namespace == "y" %}kubernetes_namespace.release.metadata[0].name{% else %}data.kubernetes_namespace.release.metadata[0].name{% endif %}
+  {% if cookiecutter.helm_chart_version != "latest" -%}version      = "{{ cookiecutter.helm_chart_version }}"{%- endif %}
+  namespace  = var.release_namespace
   values = [
-    "${templatefile("${path.module}/files/values.yml", {
-      CLUSTER_DOMAIN = var.ingress_domain,
-    })}"
+    yamlencode(local.EXTRA_VALUES),
+    yamlencode(var.extra_values)
   ]
 }

@@ -1,8 +1,10 @@
 {
-  "module_slug": "",
+  "module_slug": "install",
   "helm_chart": "",
+  "helm_chart_version": "latest",
   "helm_chart_repository": "https://kubernetes-charts.storage.googleapis.com",
   "helm_release_name": "{{ cookiecutter.helm_chart }}",
   "k8s_create_namespace": "n",
   "k8s_namespace_name": "{{ cookiecutter.helm_chart }}"
+  
 }
