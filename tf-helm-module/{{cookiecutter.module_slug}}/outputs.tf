@@ -1,3 +1,3 @@
-output "namespace" {
-  value = helm_release.release.namespace
+output "release" {
+  value = helm_release.release
 }
