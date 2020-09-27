@@ -1,1 +1,1 @@
-# TF Project {{ cookiecutter.module_slug }}
+# TF Project {{ cookiecutter.project_slug }}
