@@ -11,6 +11,9 @@ cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-boostrap-test" pro
 cd ./${GENERATE_PROJECT_NAME}/modules
 cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-helm-module" --checkout feature/tf-helm-modules -f
 
+
+cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-module" --checkout feature/tf-helm-modules -f
+
 cookiecutter /workspace/tf-boostrap module_slug="tf-k8s-influxdb"
 cd ./tf-k8s-influxdb/modules
 cookiecutter /workspace/tf-helm-module module_slug="install" helm_chart="influxdb" helm_chart_repository="https://helm.influxdata.com/"
