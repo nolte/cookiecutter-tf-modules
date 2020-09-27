@@ -17,12 +17,12 @@ cd "${PROJECT_BASE}"
 
 echo "Generate ${PROJECT_NAME} to ${PROJECT_BASE}"
 
-cookiecutter gh:nolte/vscode-devcontainers --directory="cookiecutter-project" project_slug="${PROJECT_NAME}" project_type="devops" extra_dockerfile="n" -f
-cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-boostrap" project_slug="${PROJECT_NAME}" --checkout feature/tf-helm-modules -f
-cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-boostrap-test" project_slug="${PROJECT_NAME}" --checkout feature/tf-helm-modules -f
+cookiecutter gh:nolte/vscode-devcontainers --directory="cookiecutter-project" project_slug="${PROJECT_NAME}" project_type="devops" extra_dockerfile="n" -f --no-input 
+cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-boostrap" project_slug="${PROJECT_NAME}" --checkout feature/tf-helm-modules -f --no-input
+cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-boostrap-test" project_slug="${PROJECT_NAME}" --checkout feature/tf-helm-modules -f --no-input
 cd ./${PROJECT_NAME}/modules
-cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-helm-module" --checkout feature/tf-helm-modules -f
-
+cookiecutter gh:nolte/cookiecutter-tf-modules --directory="tf-helm-module" --checkout feature/tf-helm-modules -f --no-input
+ 
 cd $STARTING_DIR
 
 echo "$"
