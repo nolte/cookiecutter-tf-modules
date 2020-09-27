@@ -10,7 +10,7 @@ resource "helm_release" "release" {
   repository = "{{ cookiecutter.helm_chart_repository }}"
   chart      = "{{ cookiecutter.helm_chart }}"
   {% if cookiecutter.helm_chart_version != "latest" -%}version      = var.chart_version{%- endif %}
-  namespace  = var.release_namespace
+  namespace  = var.namespace
   values = [
     yamlencode(local.EXTRA_VALUES),
     yamlencode(var.extra_values)

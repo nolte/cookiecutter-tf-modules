@@ -3,21 +3,15 @@
 package test
 
 import (
-	"path/filepath"
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 )
 
-func testsBaseDirectory() string {
-	return "../"
-}
-
-func TestMinimizeComponentsExists(t *testing.T) {
-
+func TestTerraformMinimalAccExample(t *testing.T) {
 	terraformOptions := &terraform.Options{
-		TerraformDir: filepath.Join(testsBaseDirectory(), "examples"),
+		TerraformDir: "../examples/minimal",
 	}
 
 	defer terraform.Destroy(t, terraformOptions)
@@ -26,5 +20,4 @@ func TestMinimizeComponentsExists(t *testing.T) {
 
 	output := terraform.Output(t, terraformOptions, "helm_release")
 	assert.NotNil(t, output)
-
 }
